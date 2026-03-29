@@ -1,0 +1,95 @@
+{
+  "name": "Practice Opportunity Solution 1",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -120
+      ],
+      "id": "aff9dd5c-7696-43c6-b5d7-a3e61954729b",
+      "name": "When chat message received",
+      "webhookId": "eb3afff0-b9b4-45ca-ab59-764288d138f8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Translate the input message to French \n{{$json.chatInput}}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -80,
+        -120
+      ],
+      "id": "12ab6735-0d4d-4ec1-b65a-3aa881000f97",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-3-7-sonnet-20250219",
+          "cachedResultName": "Claude 3.7 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -180,
+        100
+      ],
+      "id": "c30b3b16-2c64-4e43-98d3-cba053756da2",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "84hl8ysQi8lkKGHq",
+          "name": "Anthropic account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7c6103ac-e53a-4289-83cb-fd9a87d5624c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ce68f10d1203da01dcd394550f47f622928b62b145cec8633e335d9709c9c665"
+  },
+  "id": "AgG44jCXoAndepMA",
+  "tags": []
+}

@@ -1,0 +1,100 @@
+{
+  "name": "1. Basic_Summarization_Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -420,
+        -40
+      ],
+      "id": "b3f71193-d82c-4a2f-9241-b317608641a0",
+      "name": "When chat message received",
+      "webhookId": "b1d249c7-d609-4795-a34a-91e146f2b215"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Summarize the user input in one sentence \n\n {{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -200,
+        -40
+      ],
+      "id": "fd065528-3ca9-44d7-ae4d-68ddd37b93ed",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        300
+      ],
+      "id": "40e9fbd0-0bc9-4d93-ab80-d5271834a0e8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "6lG17ChnjPsU8HqT",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f7173a91-3e82-44f8-8e41-89baebe9d1be",
+  "meta": {
+    "templateId": "self-building-ai-agent",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ce68f10d1203da01dcd394550f47f622928b62b145cec8633e335d9709c9c665"
+  },
+  "id": "o9w5p1BBylP8qpV9",
+  "tags": []
+}

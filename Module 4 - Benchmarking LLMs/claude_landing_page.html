@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectGenius - AI-Powered CRM to Boost Customer Retention</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #0056b3;
+            --secondary: #102a43;
+            --accent: #3ec8ac;
+            --light: #f7f9fc;
+            --dark: #1d2b3a;
+            --cta: #ff6b6b;
+            --text: #334e68;
+            --border: #e1e5eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        button, .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        button:hover, .btn:hover {
+            background-color: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-cta {
+            background-color: var(--cta);
+        }
+        
+        .btn-cta:hover {
+            background-color: #ff5252;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #003a7a 100%);
+            color: white;
+            padding: 10rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffffff' fill-opacity='0.05' d='M600 300v-50c0-138.071-111.929-250-250-250S100 111.929 100 250v50c0-138.071 111.929-250 250-250s250 111.929 250 250z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--light);
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            position: relative;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-text:before {
+            content: """;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--border);
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background-color: var(--light);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .pricing-header h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .pricing-features {
+            padding: 2rem;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features ul li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pricing-features ul li:before {
+            content: "✓";
+            color: var(--accent);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured .pricing-header {
+            background-color: var(--primary);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #ff3a3a;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #ff3a3a;
+            color: white;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e52222;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Connect<span>Genius</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>AI-Powered CRM That Actually Works</h1>
+                <p>ConnectGenius analyzes customer interactions, predicts needs, and automates personalized follow-ups to boost retention and sales efficiency.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-cta">Get Started Free</a>
+                    <a href="#how" class="btn">See How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container text-center">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">ConnectGenius uses advanced AI to transform your customer relationships and drive business growth.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Interaction Analysis</h3>
+                    <p>Our AI engine analyzes every customer touchpoint to identify patterns, sentiment, and opportunities that humans might miss.</p>
+                </div>
+                
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Predictive Insights</h3>
+                    <p>Anticipate customer needs before they arise with our predictive modeling system that forecasts intent and buying signals.</p>
+                </div>
+                
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Automated Follow-Ups</h3>
+                    <p>Set it and forget it. Our system crafts personalized messages that feel human, sending them at the optimal time for engagement.</p>
+                </div>
+                
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>ConnectGenius works with your existing tools and data sources, creating a unified customer view across all platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="how-it-works">
+        <div class="container text-center">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Getting started with ConnectGenius is straightforward and delivers rapid results for your business.</p>
+            
+            <div class="steps">
+                <div class="step animate">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Data</h3>
+                    <p>Integrate your existing customer data from email, CRM, support tickets, and social media in minutes.</p>
+                </div>
+                
+                <div class="step animate">
+                    <div class="step-number">2</div>
+                    <h3>AI Analyzes Patterns</h3>
+                    <p>Our algorithm learns your customers' behavior, preferences, and communication patterns.</p>
+                </div>
+                
+                <div class="step animate">
+                    <div class="step-number">3</div>
+                    <h3>Automated Engagement</h3>
+                    <p>Set up custom workflows that trigger personalized outreach based on AI insights.</p>
+                </div>
+                
+                <div class="step animate">
+                    <div class="step-number">4</div>
+                    <h3>Monitor & Optimize</h3>
+                    <p>Track results in real-time and let the system continuously improve through machine learning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container text-center">
+            <h2 class="section-title">Customer Success Stories</h2>
+            <p class="section-subtitle">Don't just take our word for it. See what our customers are saying about ConnectGenius.</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial animate">
+                    <div class="testimonial-text">
+                        <p>ConnectGenius has transformed our customer service department. Our retention rate increased by 32% in just three months with the AI-driven follow-up system.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CMO, TechNova Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial animate">
+                    <div class="testimonial-text">
+                        <p>The predictive insights feature is like having a crystal ball for our sales team. We can now anticipate customer needs before they even express them.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Sales Director, GrowthForce Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial animate">
+                    <div class="testimonial-text">
+                        <p>As a small business, we couldn't afford a large customer service team. ConnectGenius has become our virtual team, handling customer follow-ups with incredible accuracy.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div class="author-info">
+                            <h4>Jessica Taylor</h4>
+                            <p>Owner, Boutique Wellness</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container text-center">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Choose the plan that fits your business needs with no hidden fees or long-term commitments.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card animate">
+                    <div class="pricing-header">
+                        <h3>Startup</h3>
+                        <div class="price">$49<span>/month</span></div>
+                        <p>Perfect for small businesses getting started with AI-powered CRM</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Up to 1,000 customer profiles</li>
+                            <li>Basic AI interaction analysis</li>
+                            <li>Automated email follow-ups</li>
+                            <li>Standard reporting dashboard</li>
+                            <li>Email support</li>
+                        </ul>
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card featured animate">
+                    <div class="pricing-header">
+                        <h3>Business</h3>
+                        <div class="price">$149<span>/month</span></div>
+                        <p>Advanced features for growing companies with established customer bases</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Up to 10,000 customer profiles</li>
+                            <li>Advanced AI prediction engine</li>
+                            <li>Multi-channel automated follow-ups</li>
+                            <li>Custom workflows and triggers</li>
+                            <li>Sentiment analysis</li>
+                            <li>Priority phone & email support</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-cta">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card animate">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">Custom<span> pricing</span></div>
+                        <p>Tailored solutions for large organizations with complex needs</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Unlimited customer profiles</li>
+                            <li>Full access to AI capabilities</li>
+                            <li>Custom integration development</li>
+                            <li>Dedicated success manager</li>
+                            <li>Advanced analytics & reporting</li>
+                            <li>24/7 premium support</li>
+                            <li>On-site training and setup</li>
+                        </ul>
+                        <a href="#contact" class="btn">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container text-center">
+            <h2 class="section-title">Ready to Transform Your Customer Relationships?</h2>
+            <p class="section-subtitle">Get started with ConnectGenius today or schedule a free demo to see how our AI-powered CRM can work for your business.</p>
+            
+            <form class="contact-form animate">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" class="form-control" placeholder="Your company" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Tell us about your needs</label>
+                    <textarea id="message" class="form-control" placeholder="What specific challenges are you facing with customer relationships?" required></textarea>
+                </div>
+                <button type="submit" class="btn submit-btn">Start Free Trial</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConnectGenius</h3>
+                    <p>AI-powered CRM that helps businesses build stronger customer relationships through intelligent automation and predictive insights.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ConnectGenius. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkIfInView() {
+                animateElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            // Set initial state
+            animateElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transition = 'opacity 0.6s ease';
+            });
+            
+            // Check on load
+            checkIfInView();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkIfInView);
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav ul');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

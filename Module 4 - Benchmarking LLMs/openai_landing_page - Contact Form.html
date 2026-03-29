@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectGenius - Intelligent CRM System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background-color: #4A90E2;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        .hero {
+            background-color: #f5f5f5;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .hero button {
+            background-color: #e94e77;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .hero button:hover {
+            background-color: #d43f67;
+        }
+        .features, .how-it-works, .testimonials, .pricing {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .features h3, .how-it-works h3, .testimonials h3, .pricing h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        .features div, .how-it-works div, .testimonials div {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .features div div, .how-it-works div div, .testimonials div div {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+        .features div div img, .how-it-works div div img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        .pricing-table {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .pricing-table div {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        .pricing-table div h4 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .pricing-table div p {
+            margin: 5px 0;
+        }
+        .pricing-table div button {
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .pricing-table div button:hover {
+            background-color: #3b7bbf;
+        }
+        .contact-form {
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .contact-form form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #e94e77;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: #d43f67;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #e94e77;
+        }
+        footer .social-media {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ConnectGenius</h1>
+        <p>Your Intelligent CRM Solution</p>
+    </header>
+
+    <section class="hero">
+        <h2>Revolutionize Your Customer Interactions with AI</h2>
+        <button>Get Started</button>
+    </section>
+
+    <section class="features">
+        <h3>Key Features</h3>
+        <div>
+            <div>
+                <img src="feature-icon1.png" alt="Feature 1">
+                <h4>AI-Powered Insights</h4>
+                <p>Gain actionable insights from your customer data.</p>
+            </div>
+            <div>
+                <img src="feature-icon2.png" alt="Feature 2">
+                <h4>Predictive Analytics</h4>
+                <p>Anticipate customer needs and stay ahead of the curve.</p>
+            </div>
+            <div>
+                <img src="feature-icon3.png" alt="Feature 3">
+                <h4>Automated Follow-ups</h4>
+                <p>Save time with personalized, automated follow-ups.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h3>How It Works</h3>
+        <div>
+            <div>
+                <h4>1. Connect</h4>
+                <p>Integrate your existing systems with ease.</p>
+            </div>
+            <div>
+                <h4>2. Analyze</h4>
+                <p>Our AI analyzes interactions to find patterns.</p>
+            </div>
+            <div>
+                <h4>3. Act</h4>
+                <p>Receive actionable insights and recommendations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h3>What Our Customers Say</h3>
+        <div>
+            <div>
+                <p>"ConnectGenius transformed our customer engagement strategy."</p>
+                <p>- Alex, CEO of TechCorp</p>
+            </div>
+            <div>
+                <p>"The predictive analytics feature is a game-changer."</p>
+                <p>- Jamie, Marketing Director at Innovate Inc.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <h3>Pricing Plans</h3>
+        <div class="pricing-table">
+            <div>
+                <h4>Basic</h4>
+                <p>$29/month</p>
+                <p>Essential features for small businesses.</p>
+                <button>Select Plan</button>
+            </div>
+            <div>
+                <h4>Pro</h4>
+                <p>$59/month</p>
+                <p>Advanced features for growing businesses.</p>
+                <button>Select Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <h3>Contact Us</h3>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 ConnectGenius. All rights reserved.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>

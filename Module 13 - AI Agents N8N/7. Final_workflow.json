@@ -1,0 +1,691 @@
+{
+  "name": "7. Final_workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -560,
+        -140
+      ],
+      "id": "d8372633-e444-4cd5-87d7-4bb716f6a348",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5jF2asTs8pkelxt0",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze the following email details:\n\nInput: \n{{$json.From}} \n{{ $json.Subject }}\n{{ $json.snippet }}\n\nYour tasks:\n1. Categorize this email into ONE of the following categories: \"Promotion\", \"Important\" and \"Meeting Request\".\n\n2. If the category is \"Promotion\", determine if it's relevant to these interests based on the interest i mention in the google sheet that is available as tool. Set 'isRelevantPromotion' to true or false. Also extract the 'offerDetails' (brief summary of the deal/product) and the 'brandName’.\n\n3. If the category is \"Meeting Request\", extract the 'proposedTime' (if any mentioned), the 'meetingTopic', and list the 'senderEmail', 'brandName' and if any offer mentioned at it to \"offerDetails“\n\n4. If the category is \"Important\", briefly explain 'reasonWhyImportant', get the \"senderEmail\" and \"brandName“\n\n5. Provide the output ONLY in valid JSON format like this example:\n{  \"category\": \"Promotion\",  \"isRelevantPromotion\": true,  \"offerDetails\": \"30% off annual subscription\",  \"brandName\": \"XYZ Software\",  \"proposedTime\": null,  \"meetingTopic\": null,  \"senderEmail\": null,  \"reasonWhyImportant\": null}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -220,
+        -140
+      ],
+      "id": "69d2b323-5276-4e29-8a0f-23546a759ba4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "id"
+        },
+        "options": {
+          "responseFormat": "json_object"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        80
+      ],
+      "id": "2956b01e-9cef-4102-acf0-03e11f4eedb5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "FKrgNf62ctWSjI9S",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"category\": \"Promotion\",\n  \"isRelevantPromotion\": true,\n  \"offerDetails\": \"30% off annual subscription\",\n  \"brandName\": \"XYZ Software\",\n  \"proposedTime\": \"none\",\n  \"meetingTopic\": \"none\",\n  \"senderEmail\": \"temp@gmail.com\",\n  \"reasonWhyImportant\": \"some reason\"\n  \n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        140,
+        340
+      ],
+      "id": "a8eff688-a74f-411d-949b-8cd165ac5c3e",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Review my personal promotion preferences and use them to determine whether each promotion is relevant. \n",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1rbIWKAJUfyDZQP0dp22S42YGiIpCwChwWt6b1NtRF_A/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rbIWKAJUfyDZQP0dp22S42YGiIpCwChwWt6b1NtRF_A/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -260,
+        260
+      ],
+      "id": "f75a014b-a231-450f-a357-b12b6493ce77",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m9SbiFwP9y8vkLri",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.category }}",
+                    "rightValue": "Promotion",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "efa89160-7f04-489f-807e-18a7156211f3"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "bea3ea6b-16e8-4f3c-b456-8b8dbb9252d5",
+                    "leftValue": "={{ $json.output.category }}",
+                    "rightValue": "Meeting Request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7dd65636-8712-4460-aa91-8c922f3ad967",
+                    "leftValue": "={{ $json.output.category }}",
+                    "rightValue": "Important",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        200,
+        -140
+      ],
+      "id": "680797ad-23c8-4f4a-8513-8da9e5fa24df",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uDEBr7G2Itxok-Cm1wVDjOP_LE02ir3Ak8iGK3bqumE/edit?gid=1884278218#gid=1884278218",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1884278218,
+          "mode": "list",
+          "cachedResultName": "Important",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uDEBr7G2Itxok-Cm1wVDjOP_LE02ir3Ak8iGK3bqumE/edit#gid=1884278218"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Sender": "={{ $json.output.brandName }}",
+            "Sender Email": "={{ $json.output.senderEmail }}",
+            "Reason": "={{ $json.output.reasonWhyImportant }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Sender",
+              "displayName": "Sender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sender Email",
+              "displayName": "Sender Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reason",
+              "displayName": "Reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        120
+      ],
+      "id": "ad457d64-7e84-46eb-9fd2-06d49037961e",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q3VBGN4XoKWDFppK",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "prompt": "Instructions:\n--------------\n{instructions}\n--------------\nCompletion:\n--------------\n{completion}\n--------------\n\nAbove, the Completion did not satisfy the constraints given in the Instructions.\nError:\n--------------\n{error}\n--------------\n\nPlease try again. Please only respond with an answer that satisfies the constraints laid out in the Instructions:"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        120
+      ],
+      "id": "fd0e1044-a954-4e3f-b9cd-0bcb3b0ddb65",
+      "name": "Auto-fixing Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -100,
+        340
+      ],
+      "id": "3e368273-b988-4c1e-85af-cb80b04f7a5e",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "FKrgNf62ctWSjI9S",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uDEBr7G2Itxok-Cm1wVDjOP_LE02ir3Ak8iGK3bqumE/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Promotions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uDEBr7G2Itxok-Cm1wVDjOP_LE02ir3Ak8iGK3bqumE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Sender": "={{ $json.output.brandName }}",
+            "Sender Email": "={{ $json.output.senderEmail }}",
+            "reasonWhyImportant": "={{ $json.output.reasonWhyImportant }}",
+            "isRelevant": "={{ $json.output.isRelevantPromotion }}",
+            "Promotion": "={{ $json.output.offerDetails }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Promotion",
+              "displayName": "Promotion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sender",
+              "displayName": "Sender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sender Email",
+              "displayName": "Sender Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reasonWhyImportant",
+              "displayName": "reasonWhyImportant",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "isRelevant",
+              "displayName": "isRelevant",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        460,
+        -340
+      ],
+      "id": "4721020b-1936-44ed-9ef8-930eba2963ac",
+      "name": "Google Sheets2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q3VBGN4XoKWDFppK",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=## AI Email Assistant Prompt: Meeting Scheduling + Calendar Integration\n\nYou are an intelligent email assistant with access to both email content and our calendar system. Given the structured output from an email classification model, perform the following actions:\n\nCurrent data {{ $now }}\n---\n\n### Input:\n\n      \"category\": {{ $json.output.category }},\n      \"isRelevantPromotion\":{{ $json.output.isRelevantPromotion }},\n      \"offerDetails\": {{ $json.output.offerDetails }},\n      \"brandName\": {{ $json.output.offerDetails }},\n      \"proposedTime\": {{ $json.output.proposedTime }},\n      \"meetingTopic\": {{ $json.output.meetingTopic }},\n      \"senderEmail\":{{ $json.output.senderEmail }},\n      \"reasonWhyImportant\": {{ $json.output.reasonWhyImportant }}\n\n### Instructions:\n\n1. **If `proposedTime` is not empty**:\n    - Check availability in the connected calendar tool.\n    - **If available**:\n        - Block that time with the `meetingTopic`.\n        - Invite `senderEmail`.\n        - Draft reply:\n            \n            > \"Thank you for your email. The proposed time of [insert time] works well for us. I've added it to our calendar. Looking forward to the discussion.\"\n            > \n    - **If not available**:\n        - Search for the next 30-minute free slot within 2 business days.\n        - If found, draft reply:\n            \n            > \"Thank you for your email. Unfortunately, we’re not available at the proposed time. Would [insert alternate time] work for you instead? Let us know and we’ll send over the invite.\"\n            > \n        - If no alternative found, escalate to manual review.\n2. **If `proposedTime` is empty**:\n    - Do not trigger calendar workflow.\n    - Log the `reasonWhyImportant` for internal reference. ",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        680,
+        -140
+      ],
+      "id": "407c0b33-8db3-4d26-8e6f-f2d418e1feb7",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        680,
+        140
+      ],
+      "id": "42183fac-267d-4ab1-b9d0-44c805b03990",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "FKrgNf62ctWSjI9S",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Check the calendar for slots\n",
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ryan.ahmed85@gmail.com",
+          "mode": "list",
+          "cachedResultName": "ryan.ahmed85@gmail.com"
+        },
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        1040,
+        220
+      ],
+      "id": "bf933a3f-b3da-4ba8-a2c4-4ce3d0bedee6",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "VBoF3s82XnT2RJIR",
+          "name": "Google Calendar account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Setup a calendar invite meeting ",
+        "calendar": {
+          "__rl": true,
+          "value": "ryan.ahmed85@gmail.com",
+          "mode": "list",
+          "cachedResultName": "ryan.ahmed85@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        800,
+        280
+      ],
+      "id": "45d6d534-b2c3-491d-8c88-e0051db0f8d0",
+      "name": "Google Calendar1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "VBoF3s82XnT2RJIR",
+          "name": "Google Calendar account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send Emails",
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        180
+      ],
+      "id": "6e955cbb-85f9-4914-a79b-18ff2bae5874",
+      "name": "Gmail",
+      "webhookId": "0c98388b-2c80-42f5-becf-559650de2576",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5jF2asTs8pkelxt0",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-fixing Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1df8365f-918d-4e2f-85d9-c8921136babe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ce68f10d1203da01dcd394550f47f622928b62b145cec8633e335d9709c9c665"
+  },
+  "id": "TsNkvrQsiY9Cm1LA",
+  "tags": []
+}

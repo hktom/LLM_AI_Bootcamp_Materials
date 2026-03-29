@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectGenius - Intelligent AI CRM for Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-top: 0;
+        }
+        a {
+            text-decoration: none;
+            color: #4A90E2; /* Primary Color */
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #357ABD; /* Darker Primary */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        .btn-primary {
+            background-color: #4A90E2; /* Primary Color */
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+            color: #fff;
+        }
+         .btn-accent {
+            background-color: #50E3C2; /* Accent Color */
+            color: #333;
+        }
+        .btn-accent:hover {
+            background-color: #40BFA5;
+            transform: translateY(-2px);
+            color: #333;
+        }
+        .btn-danger {
+             background-color: #E74C3C; /* Red Accent */
+             color: #fff;
+        }
+        .btn-danger:hover {
+             background-color: #C0392B;
+             transform: translateY(-2px);
+             color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Responsive Grid/Flex common styles */
+        .grid-container {
+            display: grid;
+            gap: 30px;
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        /* Basic Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            section { padding: 40px 15px; }
+            .grid-container { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: 20px; }
+            .footer-nav, .footer-social { text-align: center; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            .btn { padding: 10px 20px; font-size: 0.9em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header style="padding: 15px 0; background-color: #fff; border-bottom: 1px solid #eee;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="margin: 0; font-size: 2.2em; font-weight: 700; color: #333;">ConnectGenius</h1>
+            <p style="margin: 0; font-size: 1.1em; color: #555;">Intelligent CRM. Smarter Relationships.</p>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" style="background: linear-gradient(135deg, #F5F7FA 0%, #E0E8F0 100%); color: #333; padding: 100px 20px; text-align: center;">
+        <div class="container fade-in">
+            <h2 style="font-size: 2.8em; margin-bottom: 20px; line-height: 1.3;">Stop Losing Customers. Start Growing with AI.</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; color: #555;">
+                ConnectGenius uses AI to analyze interactions, predict customer needs, and automate personalized follow-ups, boosting retention and sales efficiency effortlessly.
+            </p>
+            <a href="#contact" class="btn btn-primary">Get Started for Free</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" style="background-color: #ffffff;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px; font-size: 2.3em;">Why Choose ConnectGenius?</h2>
+            <div class="grid-container fade-in" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); align-items: start;">
+                <!-- Feature 1 -->
+                <div style="background-color: #F5F7FA; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="font-size: 2.5em; color: #4A90E2; margin-bottom: 15px;">🧠</div> <!-- Simple Icon Placeholder -->
+                    <h3 style="font-size: 1.4em; margin-bottom: 10px;">AI-Powered Insights</h3>
+                    <p style="color: #555;">Understand customer sentiment and predict future needs with cutting-edge AI analysis. Turn data into actionable retention strategies.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div style="background-color: #F5F7FA; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="font-size: 2.5em; color: #50E3C2; margin-bottom: 15px;">⚙️</div> <!-- Simple Icon Placeholder -->
+                    <h3 style="font-size: 1.4em; margin-bottom: 10px;">Automated Follow-ups</h3>
+                    <p style="color: #555;">Save time and never miss an opportunity. Automate personalized emails and tasks based on customer behavior and AI predictions.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div style="background-color: #F5F7FA; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="font-size: 2.5em; color: #F5A623; margin-bottom: 15px;">📈</div> <!-- Simple Icon Placeholder -->
+                    <h3 style="font-size: 1.4em; margin-bottom: 10px;">Boost Sales Efficiency</h3>
+                    <p style="color: #555;">Focus your sales team on the hottest leads. Our AI prioritizes prospects and suggests the best engagement tactics for faster closing.</p>
+                </div>
+                 <!-- Feature 4 -->
+                <div style="background-color: #F5F7FA; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="font-size: 2.5em; color: #7ED321; margin-bottom: 15px;">🤝</div> <!-- Simple Icon Placeholder -->
+                    <h3 style="font-size: 1.4em; margin-bottom: 10px;">Improve Retention</h3>
+                    <p style="color: #555;">Proactively address potential churn risks. Identify unhappy customers early and trigger automated retention campaigns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how-it-works" style="background-color: #F5F7FA;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px; font-size: 2.3em;">Get Started in 3 Simple Steps</h2>
+            <div class="fade-in" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <div style="display: flex; align-items: start; margin-bottom: 30px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <span style="font-size: 1.8em; font-weight: 700; color: #4A90E2; margin-right: 20px; min-width: 30px;">1.</span>
+                    <div>
+                        <h3 style="margin-bottom: 5px; font-size: 1.3em;">Connect Your Data</h3>
+                        <p style="color: #555; margin: 0;">Easily integrate your existing customer data sources – email, support tickets, call logs, and more. Secure and seamless.</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: start; margin-bottom: 30px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <span style="font-size: 1.8em; font-weight: 700; color: #4A90E2; margin-right: 20px; min-width: 30px;">2.</span>
+                    <div>
+                        <h3 style="margin-bottom: 5px; font-size: 1.3em;">AI Analysis Runs</h3>
+                        <p style="color: #555; margin: 0;">ConnectGenius automatically analyzes interactions, identifying patterns, predicting needs, and scoring lead potential.</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: start; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <span style="font-size: 1.8em; font-weight: 700; color: #4A90E2; margin-right: 20px; min-width: 30px;">3.</span>
+                    <div>
+                        <h3 style="margin-bottom: 5px; font-size: 1.3em;">Automate & Grow</h3>
+                        <p style="color: #555; margin: 0;">Utilize AI-driven insights to trigger automated follow-ups, personalize communication, and watch your retention & sales soar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background-color: #ffffff;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px; font-size: 2.3em;">Trusted by Businesses Like Yours</h2>
+            <div class="grid-container fade-in" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="border: 1px solid #eee; padding: 30px; border-radius: 8px; background: #F5F7FA; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <p style="font-style: italic; color: #555; margin-bottom: 15px;">"ConnectGenius transformed how we handle customer follow-ups. Our retention rate is up 25% in just six months!"</p>
+                    <p style="font-weight: 600; color: #333;">- Sarah L., CEO @ Innovate Solutions</p>
+                </div>
+                <div style="border: 1px solid #eee; padding: 30px; border-radius: 8px; background: #F5F7FA; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <p style="font-style: italic; color: #555; margin-bottom: 15px;">"The AI insights are incredibly accurate. We now know exactly which customers need attention before they even tell us. It's like magic!"</p>
+                    <p style="font-weight: 600; color: #333;">- Mark T., Sales Director @ TechForward Inc.</p>
+                </div>
+                <div style="border: 1px solid #eee; padding: 30px; border-radius: 8px; background: #F5F7FA; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <p style="font-style: italic; color: #555; margin-bottom: 15px;">"As a small business, efficiency is key. The automation features save us hours every week, allowing us to focus on building relationships."</p>
+                    <p style="font-weight: 600; color: #333;">- Emily Chen, Owner @ Creative Goods Co.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" style="background-color: #F5F7FA;">
+        <div class="container">
+            <h2 style="margin-bottom: 50px; font-size: 2.3em;">Simple Pricing for Every Business</h2>
+            <div class="grid-container fade-in pricing-grid" style="grid-template-columns: 1fr 1fr; max-width: 800px; margin: 40px auto;">
+                <!-- Pricing Tier 1 -->
+                <div style="border: 1px solid #ddd; padding: 30px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)';">
+                    <h3 style="font-size: 1.5em; color: #4A90E2; margin-bottom: 15px;">Starter</h3>
+                    <p style="font-size: 2em; font-weight: 700; margin-bottom: 15px;">$49<span style="font-size: 0.5em; font-weight: 400;">/mo</span></p>
+                    <ul style="list-style: '✓ '; padding-left: 20px; margin-bottom: 25px; color: #555; text-align: left;">
+                        <li style="margin-bottom: 8px;">Up to 1,000 Contacts</li>
+                        <li style="margin-bottom: 8px;">Basic AI Insights</li>
+                        <li style="margin-bottom: 8px;">Automated Email Follow-ups</li>
+                        <li style="margin-bottom: 8px;">Standard Support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-accent" style="width: 100%; text-align: center;">Choose Starter</a>
+                </div>
+                <!-- Pricing Tier 2 (Popular) -->
+                <div style="border: 2px solid #4A90E2; padding: 30px; border-radius: 8px; background-color: #fff; position: relative; box-shadow: 0 6px 20px rgba(74, 144, 226, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(74, 144, 226, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(74, 144, 226, 0.2)';">
+                     <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #4A90E2; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8em; font-weight: 600;">Most Popular</span>
+                    <h3 style="font-size: 1.5em; color: #4A90E2; margin-bottom: 15px;">Professional</h3>
+                    <p style="font-size: 2em; font-weight: 700; margin-bottom: 15px;">$99<span style="font-size: 0.5em; font-weight: 400;">/mo</span></p>
+                    <ul style="list-style: '✓ '; padding-left: 20px; margin-bottom: 25px; color: #555; text-align: left;">
+                        <li style="margin-bottom: 8px;">Up to 5,000 Contacts</li>
+                        <li style="margin-bottom: 8px;">Advanced AI Insights & Prediction</li>
+                        <li style="margin-bottom: 8px;">Multi-channel Automation</li>
+                        <li style="margin-bottom: 8px;">Priority Support</li>
+                        <li style="margin-bottom: 8px;">API Access</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Choose Pro</a>
+                </div>
+            </div>
+             <p style="margin-top: 30px; color: #555;">Need more? <a href="#contact">Contact us</a> for Enterprise solutions.</p>
+        </div>
+    </section>
+
+    <!-- Contact/Sign-up Form Section -->
+    <section id="contact" style="background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: #fff; padding: 80px 20px;">
+        <div class="container fade-in">
+            <h2 style="margin-bottom: 30px; font-size: 2.3em;">Ready to Elevate Your Customer Relationships?</h2>
+            <p style="margin-bottom: 40px; font-size: 1.1em; max-width: 600px; margin-left: auto; margin-right: auto;">Sign up for a free trial or request a demo today. See ConnectGenius in action!</p>
+            <form style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left;">
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Name:</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Work Email:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1em;">
+                </div>
+                 <div style="margin-bottom: 25px;">
+                    <label for="company" style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Company Name:</label>
+                    <input type="text" id="company" name="company" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1em;">
+                </div>
+                <button type="submit" class="btn btn-danger" style="width: 100%; padding: 15px; font-size: 1.1em;">Request Free Trial / Demo</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #333; color: #ccc; padding: 40px 20px; text-align: center;">
+        <div class="container footer-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div class="footer-nav" style="margin-bottom: 20px;">
+                <a href="#features" style="color: #ccc; margin: 0 10px;">Features</a> |
+                <a href="#how-it-works" style="color: #ccc; margin: 0 10px;">How It Works</a> |
+                <a href="#pricing" style="color: #ccc; margin: 0 10px;">Pricing</a> |
+                <a href="#contact" style="color: #ccc; margin: 0 10px;">Contact</a> |
+                <a href="#" style="color: #ccc; margin: 0 10px;">Privacy Policy</a>
+            </div>
+             <div class="footer-social" style="margin-bottom: 20px;">
+                <!-- Replace # with actual links and use icons later -->
+                <a href="#" style="color: #ccc; margin: 0 8px; font-size: 1.4em;" title="Facebook">F</a>
+                <a href="#" style="color: #ccc; margin: 0 8px; font-size: 1.4em;" title="Twitter">T</a>
+                <a href="#" style="color: #ccc; margin: 0 8px; font-size: 1.4em;" title="LinkedIn">in</a>
+            </div>
+            <p style="margin: 0; font-size: 0.9em; width: 100%; text-align: center;">&copy; 2024 ConnectGenius. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

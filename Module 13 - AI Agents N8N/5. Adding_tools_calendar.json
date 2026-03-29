@@ -1,0 +1,182 @@
+{
+  "name": "4. Adding_tools_calendar",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -80
+      ],
+      "id": "36bbb165-d09e-4252-8165-4d005fe74c11",
+      "name": "When chat message received",
+      "webhookId": "58bc5c12-1037-49c0-892b-5f9acdfcf271"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Context: You are a helpful assistant with access to the user's personal Google Calendar, capable of checking events and creating new ones as needed.\n\nInstruction: When the user requests to check their calendar or perform tasks related to it, use the available tools to access the Google Calendar, retrieve relevant event information, or create new events based on the user's input.\n\nInput: The user may provide requests such as \"Check my calendar for events this week\" or \"Create a meeting on Friday at 2 PM.\"\n\nOutput: Provide accurate responses based on the calendar data (e.g., listing events or confirming event creation) in a clear and concise manner, ensuring the user's request is fully addressed\n\ntime:  {{ $now }}\nInput: {{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -80,
+        -80
+      ],
+      "id": "361ee2d4-b5c6-4fcc-9494-dacd9dba6404",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.5-preview",
+          "mode": "list",
+          "cachedResultName": "gpt-4.5-preview"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -280,
+        200
+      ],
+      "id": "2ad00a58-8e3a-4442-a14f-a6959bf44bcd",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "6lG17ChnjPsU8HqT",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to check for events in my calendar",
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ryan.ahmed85@gmail.com",
+          "mode": "list",
+          "cachedResultName": "ryan.ahmed85@gmail.com"
+        },
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        220,
+        180
+      ],
+      "id": "2d99358c-6bcc-46d6-a048-4a19185d0ec6",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "3MbDHqHorQBcWRcZ",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Create an event in my calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ryan.ahmed85@gmail.com",
+          "mode": "list",
+          "cachedResultName": "ryan.ahmed85@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        140
+      ],
+      "id": "bb9bd2a9-038a-4ae3-ba3a-cdbaca765b4f",
+      "name": "Google Calendar1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "3MbDHqHorQBcWRcZ",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e13e1b05-36e6-4523-ac3a-0ccb73bb80d3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ce68f10d1203da01dcd394550f47f622928b62b145cec8633e335d9709c9c665"
+  },
+  "id": "ckZHWOekh7SGm8Io",
+  "tags": []
+}

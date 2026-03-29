@@ -1,0 +1,36 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Documents & archives
+*.pptx
+*.pdf
+*.zip
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Tabular data
+*.csv
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.tiff
+*.tif
+*.svg
+*.ico
+*.heic
+*.avif
